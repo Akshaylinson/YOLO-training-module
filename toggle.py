@@ -1,39 +1,3 @@
-# YOLO detection script on Picamera
-
-import os
-import sys
-import argparse
-import glob
-import time
-import gpiozero
-
-import cv2
-import numpy as np
-from ultralytics import YOLO
-
-### Set user-defined parameters and program parameters
-
-# User-defined parameters
-model_path = 'yolo11n_ncnn_model'	# Path to model file or folder
-cam_source = 'usb0' 				# Options: 'usb0' for USB camera, 'picamera0' for Picamera
-min_thresh = 0.5 					# Minimum detection threshold
-resW, resH = 1280, 720				# Resolution to run camera at
-record = False						# Enables recording if True
-
-# Program parameters
-# Define Raspberry Pi GPIO pin to toggle
-gpio_pin = 14
-
-# Define box coordinates where we want to look for a person. If a person is present in this box for enough frames, toggle GPIO to turn light on.
-pbox_xmin = 540
-pbox_ymin = 160
-pbox_xmax = 760
-pbox_ymax = 450
-
-# Set detection bounding box colors (using the Tableu 10 color scheme)
-bbox_colors = [(164,120,87), (68,148,228), (93,97,209), (178,182,133), (88,159,106), 
-              (96,202,231), (159,124,168), (169,162,241), (98,118,150), (172,176,184)]
-
 ### Initialize YOLO model, GPIO, and camera
 
 # Set up Raspberry Pi GPIO
